@@ -6,8 +6,9 @@ RUN apt-get update && apt-get -y install libmagic1 libzbar0 && apt-get clean
 
 RUN pip install --no-cache-dir gunicorn pillow python-magic
 
-COPY zbar-0.10-cp27-cp27mu-linux_x86_64.whl /tmp
-RUN pip install --no-cache-dir /tmp/zbar-0.10-cp27-cp27mu-linux_x86_64.whl
+ARG PIP_EXTRA_ARGS
+
+RUN pip install --no-cache-dir $PIP_EXTRA_ARGS zbar
 
 COPY wsgi.py /
 
